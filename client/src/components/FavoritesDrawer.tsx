@@ -20,7 +20,7 @@ export const FavoritesDrawer: React.FC<Props> = ({ isOpen, onClose, favoriteVill
         <div className="flex items-center justify-between p-5 border-b border-orange-100/50">
           <div className="flex items-center gap-2">
             <Heart className="w-5 h-5 text-[#FF7E5F]" />
-            <h2 className="font-['Playfair_Display',serif] text-xl font-bold">Saved Villas</h2>
+            <h2 className="font-['Cormorant_Garamond',serif] text-xl font-bold">Saved Villas</h2>
           </div>
           <button onClick={onClose} className="p-2 rounded-full hover:bg-slate-100"><X className="w-5 h-5" /></button>
         </div>

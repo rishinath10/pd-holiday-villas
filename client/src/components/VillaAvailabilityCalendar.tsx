@@ -58,7 +58,7 @@ export const VillaAvailabilityCalendar: React.FC<Props> = ({ villaSlug, selected
     <div className="bg-white rounded-2xl p-4 border border-orange-100/50 shadow-soft">
       <div className="flex items-center justify-between mb-4">
         <button onClick={prevMonth} className="p-1.5 rounded-full hover:bg-slate-100 transition-colors"><ChevronLeft className="w-5 h-5" /></button>
-        <h4 className="font-['Playfair_Display',serif] text-lg font-bold">{monthName}</h4>
+        <h4 className="font-['Cormorant_Garamond',serif] text-lg font-bold">{monthName}</h4>
         <button onClick={nextMonth} className="p-1.5 rounded-full hover:bg-slate-100 transition-colors"><ChevronRight className="w-5 h-5" /></button>
       </div>
       {loading && <div className="text-center text-sm text-slate-400 py-2">Loading availability...</div>}

@@ -23,7 +23,7 @@ export const OTAChannelsCarousel: React.FC = () => {
                   <CheckCircle2 className="w-3.5 h-3.5" /> Best Rate Guaranteed
                 </span>
               </div>
-              <h3 className="font-['Playfair_Display',serif] text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-white mt-1">
+              <h3 className="font-['Cormorant_Garamond',serif] text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-white mt-1">
                 0% Service & Platform Fees &bull; Book Direct & Save
               </h3>
               <p className="text-xs sm:text-sm text-teal-100/90 font-medium max-w-xl mt-0.5">

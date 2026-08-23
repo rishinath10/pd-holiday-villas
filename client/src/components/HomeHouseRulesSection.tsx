@@ -21,7 +21,7 @@ export const HomeHouseRulesSection: React.FC<Props> = ({ onNavigateToRules }) =>
           <div className="flex items-center justify-between mb-5 sm:mb-6">
             <div>
               <span className="inline-block px-3 py-1 rounded-full bg-[#ffdad2]/50 text-[#a53b22] text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-2">Guest Guidelines</span>
-              <h2 className="font-['Playfair_Display',serif] text-xl sm:text-3xl font-bold text-[#1A2A2B]">House Rules</h2>
+              <h2 className="font-['Cormorant_Garamond',serif] text-xl sm:text-3xl font-bold text-[#1A2A2B]">House Rules</h2>
             </div>
             <button
               onClick={onNavigateToRules}
@@ -39,7 +39,7 @@ export const HomeHouseRulesSection: React.FC<Props> = ({ onNavigateToRules }) =>
                   <Icon className={`w-4.5 h-4.5 ${color}`} />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-['Playfair_Display',serif] text-sm font-bold text-[#1A2A2B] mb-0.5">{title}</h3>
+                  <h3 className="font-['Cormorant_Garamond',serif] text-sm font-bold text-[#1A2A2B] mb-0.5">{title}</h3>
                   <p className="text-xs text-slate-500 leading-relaxed">{desc}</p>
                 </div>
               </div>
