@@ -24,8 +24,8 @@ export const Navbar: React.FC<Props> = ({ activeTab, setActiveTab, favoritesCoun
   ] as const;
 
   return (
-    <nav className="sticky top-0 z-40 w-full px-3 sm:px-6 py-2.5 sm:py-3">
-      <div className="max-w-7xl mx-auto glass-pill rounded-2xl shadow-soft border border-white/40 px-4 py-2.5 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-40 px-3 sm:px-6 py-2 sm:py-2.5">
+      <div className="max-w-3xl mx-auto glass-pill rounded-2xl shadow-soft border border-white/40 px-3 sm:px-4 py-2 flex items-center justify-between gap-2">
         {/* Brand */}
         <button onClick={() => setActiveTab('home')} className="shrink-0">
           <img src="/logo-sm.png" alt="PD Holiday Villas" className="h-9 sm:h-11 w-auto object-contain" />
@@ -67,7 +67,7 @@ export const Navbar: React.FC<Props> = ({ activeTab, setActiveTab, favoritesCoun
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden mt-2 max-w-7xl mx-auto glass-pill rounded-2xl shadow-soft border border-white/40 p-3 animate-modal-slide-up">
+        <div className="lg:hidden mt-2 max-w-3xl mx-auto glass-pill rounded-2xl shadow-soft border border-white/40 p-3 animate-modal-slide-up">
           <div className="grid grid-cols-2 gap-1.5">
             {navItems.map(({ key, label, icon: Icon }) => (
               <button key={key} onClick={() => { setActiveTab(key as any); setMobileMenuOpen(false); }} className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${activeTab === key ? 'bg-[#FF7E5F] text-white' : 'text-slate-600 hover:bg-slate-100'}`}>

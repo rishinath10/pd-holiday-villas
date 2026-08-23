@@ -155,7 +155,7 @@ export default function App() {
         openAdminDashboard={() => setIsAdminDashboardOpen(true)}
       />
 
-      <main className="flex-1 w-full pb-16 sm:pb-8">
+      <main className="flex-1 w-full pt-16 sm:pt-[68px] pb-16 sm:pb-8">
         {activeTab === 'home' && (
           <div className="space-y-4 sm:space-y-5">
             <HeroSection
