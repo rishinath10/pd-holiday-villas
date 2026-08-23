@@ -41,7 +41,7 @@ export const GuestExperiencesSection: React.FC<Props> = ({ onSelectVilla, villas
         {GUEST_EXPERIENCES_DATA.slice(0, 6).map((exp) => (
           <div key={exp.id} className="bg-[#FFF9F5] rounded-2xl p-5 border border-orange-100/50 shadow-soft flex flex-col shrink-0 w-[300px] sm:w-[340px] snap-start">
             <div className="flex items-center gap-3 mb-3">
-              <img src={exp.avatar} alt={`${exp.guestName} avatar`} referrerPolicy="no-referrer" className="w-10 h-10 rounded-full object-cover" />
+              <img src={exp.avatar} alt={`${exp.guestName} avatar`} referrerPolicy="no-referrer" loading="lazy" decoding="async" className="w-10 h-10 rounded-full object-cover" />
               <div className="min-w-0 flex-1">
                 <h4 className="font-bold text-sm text-[#1A2A2B] truncate">{exp.guestName}</h4>
                 <p className="text-[11px] text-slate-500">{exp.guestLocation}</p>
@@ -61,7 +61,7 @@ export const GuestExperiencesSection: React.FC<Props> = ({ onSelectVilla, villas
             <div className="flex items-center justify-between mt-3 pt-3 border-t border-orange-100/50 text-[11px] text-slate-500">
               <button
                 onClick={() => { const v = villas.find((v) => v.slug === exp.villaId); if (v) onSelectVilla(v); }}
-                className="flex items-center gap-1 hover:text-[#FF7E5F] transition-colors"
+                className="flex items-center gap-1 py-1.5 hover:text-[#FF7E5F] transition-colors"
               >
                 <MapPin className="w-3 h-3" />{exp.villaTitle}
               </button>

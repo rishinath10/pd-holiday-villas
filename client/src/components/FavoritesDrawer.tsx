@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, Heart, Star, MapPin } from 'lucide-react';
+import { useModal } from '../hooks/useModal';
 import type { Villa } from '../types';
 
 interface Props {
@@ -11,10 +12,11 @@ interface Props {
 }
 
 export const FavoritesDrawer: React.FC<Props> = ({ isOpen, onClose, favoriteVillas, onRemoveFavorite, onSelectVilla }) => {
+  useModal(isOpen, onClose);
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end">
+    <div className="fixed inset-0 z-50 flex justify-end" role="dialog" aria-modal="true" aria-label="Saved villas">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in" onClick={onClose} />
       <div className="relative w-full max-w-sm bg-[#FFF9F5] shadow-2xl animate-slide-left flex flex-col h-full">
         <div className="flex items-center justify-between p-5 border-b border-orange-100/50">
@@ -33,7 +35,7 @@ export const FavoritesDrawer: React.FC<Props> = ({ isOpen, onClose, favoriteVill
           ) : (
             favoriteVillas.map((v) => (
               <div key={v.slug} className="bg-white rounded-2xl p-3 border border-orange-100/50 shadow-soft flex gap-3">
-                <img src={v.images[0]?.url} alt={v.images[0]?.alt || v.title} referrerPolicy="no-referrer" onClick={() => onSelectVilla(v)} className="w-20 h-20 rounded-xl object-cover cursor-pointer shrink-0" />
+                <img src={v.images[0]?.url} alt={v.images[0]?.alt || v.title} referrerPolicy="no-referrer" loading="lazy" decoding="async" onClick={() => onSelectVilla(v)} className="w-20 h-20 rounded-xl object-cover cursor-pointer shrink-0" />
                 <div className="flex-1 min-w-0">
                   <h4 onClick={() => onSelectVilla(v)} className="font-bold text-sm cursor-pointer hover:text-[#FF7E5F] truncate">{v.title}</h4>
                   <p className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5"><MapPin className="w-3 h-3" />{v.location}</p>

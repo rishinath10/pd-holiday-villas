@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, CheckCircle, Calendar, Users, MapPin, ShieldCheck, MessageCircle } from 'lucide-react';
+import { useModal } from '../hooks/useModal';
 import type { Booking } from '../types';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export const BookingConfirmationModal: React.FC<Props> = ({ booking, isOpen, onClose }) => {
+  useModal(isOpen, onClose);
   if (!isOpen || !booking) return null;
 
   const villaTitle = typeof booking.villa === 'object' ? booking.villa.title : '';

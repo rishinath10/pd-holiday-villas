@@ -419,7 +419,7 @@ function AdminDashboardModal({ isOpen, onClose, villas, onVillasChanged }: Props
                   {villas.map(v => (
                     <div key={v._id} className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex gap-4 hover:shadow-md transition-shadow">
                       <div className="relative w-28 h-24 shrink-0">
-                        <img src={v.images[0]?.url} alt={v.images[0]?.alt || v.title} referrerPolicy="no-referrer" className="w-full h-full rounded-xl object-cover" />
+                        <img src={v.images[0]?.url} alt={v.images[0]?.alt || v.title} referrerPolicy="no-referrer" loading="lazy" decoding="async" className="w-full h-full rounded-xl object-cover" />
                         <span className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded-md bg-black/60 text-white text-[9px] font-bold">{v.images.length} photos</span>
                       </div>
                       <div className="flex-1 min-w-0 space-y-1">
@@ -520,7 +520,7 @@ function AdminDashboardModal({ isOpen, onClose, villas, onVillasChanged }: Props
                 <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                   {filteredBookings.map((b, i) => { const vt = typeof b.villa === 'object' ? b.villa.title : ''; const vi = typeof b.villa === 'object' ? b.villa.images?.[0]?.url : ''; return (
                     <div key={b._id} className={`p-4 flex flex-col sm:flex-row gap-4 hover:bg-slate-50/50 transition-colors ${i > 0 ? 'border-t border-slate-100' : ''}`}>
-                      {vi && <img src={vi} alt={`${vt} thumbnail`} referrerPolicy="no-referrer" className="w-full sm:w-24 h-20 sm:h-20 rounded-xl object-cover shrink-0" />}
+                      {vi && <img src={vi} alt={`${vt} thumbnail`} referrerPolicy="no-referrer" loading="lazy" decoding="async" className="w-full sm:w-24 h-20 sm:h-20 rounded-xl object-cover shrink-0" />}
                       <div className="flex-1 min-w-0 space-y-1.5">
                         <div className="flex flex-wrap items-center gap-2"><span className="font-mono font-bold text-[#FF7E5F]">{b.bookingRef}</span><span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${sc(b.status)}`}>{b.status}</span>{b.paymentChannel && <span className="px-2 py-0.5 rounded-full bg-slate-100 text-[9px] font-bold text-slate-600">{b.paymentChannel}</span>}<span className="px-2 py-0.5 rounded-full bg-[#def1f4] text-[9px] font-bold text-[#006a68]">{b.source}</span></div>
                         <h4 className="font-bold text-sm">{b.guestName}</h4>
@@ -556,7 +556,7 @@ function AdminDashboardModal({ isOpen, onClose, villas, onVillasChanged }: Props
               </div>
               {villas.map(v => (
                 <div key={v._id} className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-sm space-y-3">
-                  <div className="flex items-center gap-3"><img src={v.images[0]?.url} alt={`${v.title} thumbnail`} referrerPolicy="no-referrer" className="w-10 h-10 rounded-lg object-cover shrink-0" /><h4 className="font-bold text-sm">{v.title}</h4></div>
+                  <div className="flex items-center gap-3"><img src={v.images[0]?.url} alt={`${v.title} thumbnail`} referrerPolicy="no-referrer" loading="lazy" decoding="async" className="w-10 h-10 rounded-lg object-cover shrink-0" /><h4 className="font-bold text-sm">{v.title}</h4></div>
                   {v.icalImportUrls && v.icalImportUrls.length > 0 ? (
                     <div className="space-y-2">{v.icalImportUrls.map((ic, idx) => (
                       <div key={idx} className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-100"><Link className="w-3.5 h-3.5 text-slate-400 shrink-0" /><span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-bold uppercase shrink-0">{ic.source}</span><span className="text-xs text-slate-500 truncate flex-1">{ic.url}</span><button onClick={() => handleDeleteIcalSource(v._id, idx)} className="p-1.5 rounded-full hover:bg-red-100 text-red-400 hover:text-red-600 shrink-0 transition-colors"><Trash2 className="w-3.5 h-3.5" /></button></div>
@@ -620,7 +620,7 @@ function AdminDashboardModal({ isOpen, onClose, villas, onVillasChanged }: Props
                     className={`group relative rounded-xl overflow-hidden border-2 transition-all ${dragOverIndex === idx ? 'border-[#FF7E5F] scale-[1.02]' : 'border-slate-100 hover:border-slate-300'}`}
                   >
                     <div className="aspect-[4/3] relative">
-                      <img src={img.url} alt={img.alt} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+                      <img src={img.url} alt={img.alt} referrerPolicy="no-referrer" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                       {idx === 0 && <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-[#FF7E5F] text-white text-[9px] font-bold uppercase shadow-sm">Cover</span>}
                       <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

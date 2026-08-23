@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /admin
+Disallow: /api/
+Disallow: /uploads/
 
 Sitemap: https://pdholidayvillas.com/sitemap.xml

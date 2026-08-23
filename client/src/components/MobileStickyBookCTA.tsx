@@ -1,5 +1,6 @@
 import React from 'react';
 import { MessageCircle, Building2 } from 'lucide-react';
+import { trackWhatsAppClick } from '../lib/analytics';
 
 interface Props {
   onExploreVillas: () => void;
@@ -20,6 +21,7 @@ export const MobileStickyBookCTA: React.FC<Props> = ({ onExploreVillas }) => {
           href="https://wa.me/60123552585"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackWhatsAppClick('mobile-sticky')}
           className="px-4 py-3 rounded-xl bg-[#25D366] hover:bg-[#1da851] text-white font-bold text-sm flex items-center gap-1.5 transition-colors shrink-0"
         >
           <MessageCircle className="w-4 h-4" />

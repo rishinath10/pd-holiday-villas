@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { X, Heart, Star, MapPin, Users, BedDouble, Bath, ShieldCheck, CheckCircle, Sparkles, AlertCircle } from 'lucide-react';
+import { useModal } from '../hooks/useModal';
 import { VillaAvailabilityCalendar } from './VillaAvailabilityCalendar';
-import { createBooking } from '../api';
+import { createBooking, fetchDatePrices } from '../api';
+import { trackBookingStarted } from '../lib/analytics';
 import type { Villa, Booking } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -17,6 +19,7 @@ interface Props {
 export const VillaDetailModal: React.FC<Props> = ({ villa, isOpen, onClose, isFavorite, onToggleFavorite, onBookingConfirmed }) => {
   const { t } = useLanguage();
   const [galleryIndex, setGalleryIndex] = useState(0);
+  useModal(isOpen, onClose);
 
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
@@ -27,12 +30,53 @@ export const VillaDetailModal: React.FC<Props> = ({ villa, isOpen, onClose, isFa
   const [specialRequests, setSpecialRequests] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [datePrices, setDatePrices] = useState<Record<string, number>>({});
+
+  const slug = villa?.slug;
+
+  // Seasonal overrides are what the server actually charges, so the quote shown
+  // here has to be built from the same numbers.
+  useEffect(() => {
+    if (!isOpen || !slug) return;
+    let cancelled = false;
+    fetchDatePrices(slug)
+      .then((prices) => {
+        if (cancelled) return;
+        const map: Record<string, number> = {};
+        for (const p of prices) map[String(p.date).slice(0, 10)] = p.price;
+        setDatePrices(map);
+      })
+      .catch(() => {
+        if (!cancelled) setDatePrices({});
+      });
+    return () => { cancelled = true; };
+  }, [isOpen, slug]);
+
+  // Switching to a smaller villa must not carry over an out-of-range count.
+  const capacity = villa?.sleepsCount;
+  useEffect(() => {
+    if (capacity && guests > capacity) setGuests(capacity);
+  }, [capacity, guests]);
+
+  const cleaningFee = 50;
+
+  const { nights, totalPrice } = useMemo(() => {
+    if (!villa || !checkIn || !checkOut) return { nights: 0, totalPrice: 0 };
+
+    const start = new Date(`${checkIn}T00:00:00Z`);
+    const end = new Date(`${checkOut}T00:00:00Z`);
+    const nightCount = Math.round((end.getTime() - start.getTime()) / 86400000);
+    if (nightCount < 1) return { nights: 0, totalPrice: 0 };
+
+    let nightly = 0;
+    for (let i = 0; i < nightCount; i++) {
+      const day = new Date(start.getTime() + i * 86400000).toISOString().slice(0, 10);
+      nightly += datePrices[day] ?? villa.pricePerNight;
+    }
+    return { nights: nightCount, totalPrice: nightly + cleaningFee };
+  }, [villa, checkIn, checkOut, datePrices]);
 
   if (!isOpen || !villa) return null;
-
-  const nights = checkIn && checkOut ? Math.max(1, Math.ceil((new Date(checkOut).getTime() - new Date(checkIn).getTime()) / 86400000)) : 0;
-  const cleaningFee = 50;
-  const totalPrice = nights > 0 ? villa.pricePerNight * nights + cleaningFee : 0;
 
   const handleCalendarSelect = (date: string) => {
     if (!checkIn || (checkIn && checkOut)) {
@@ -53,6 +97,7 @@ export const VillaDetailModal: React.FC<Props> = ({ villa, isOpen, onClose, isFa
       return;
     }
     setSubmitting(true);
+    trackBookingStarted(villa.slug, villa.title, totalPrice);
     try {
       const booking = await createBooking({
         villaSlug: villa.slug,

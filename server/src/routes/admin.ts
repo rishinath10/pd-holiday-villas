@@ -1,6 +1,6 @@
 import { Router, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import rateLimit from 'express-rate-limit';
 import multer from 'multer';
 import path from 'path';
@@ -16,6 +16,8 @@ import { requireAuth, AuthRequest } from '../middleware/auth.js';
 import { generateBookingRef } from '../utils/bookingRef.js';
 import { checkOverlap } from '../utils/overlapCheck.js';
 import { syncAllIcalFeeds } from '../utils/icalSync.js';
+import { quoteStay } from '../utils/pricing.js';
+import { asDate, startOfUTCDay } from '../utils/validate.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,14 +35,20 @@ const storage = multer.diskStorage({
   },
 });
 
+const ALLOWED_EXT = ['.jpg', '.jpeg', '.png', '.webp', '.avif'];
+const ALLOWED_MIME = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'];
+
 const upload = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 },
+  limits: { fileSize: 10 * 1024 * 1024, files: 20 },
   fileFilter: (_req, file, cb) => {
-    const allowed = ['.jpg', '.jpeg', '.png', '.webp', '.avif'];
+    // Extension drives the served Content-Type, MIME guards the upload itself.
     const ext = path.extname(file.originalname).toLowerCase();
-    if (allowed.includes(ext)) cb(null, true);
-    else cb(new Error('Only .jpg, .jpeg, .png, .webp, .avif files are allowed'));
+    if (ALLOWED_EXT.includes(ext) && ALLOWED_MIME.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only .jpg, .jpeg, .png, .webp, .avif images are allowed'));
+    }
   },
 });
 
@@ -80,7 +88,8 @@ router.post('/login', loginLimiter, async (req: AuthRequest, res: Response) => {
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      sameSite: 'strict',
+      path: '/',
       maxAge: 24 * 60 * 60 * 1000,
     });
 
@@ -91,7 +100,13 @@ router.post('/login', loginLimiter, async (req: AuthRequest, res: Response) => {
 });
 
 router.post('/logout', (_req: AuthRequest, res: Response) => {
-  res.clearCookie('token');
+  // Attributes must match those used when setting, or the cookie survives.
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    path: '/',
+  });
   res.json({ message: 'Logged out' });
 });
 
@@ -160,38 +175,43 @@ router.post('/bookings', requireAuth, async (req: AuthRequest, res: Response) =>
       return;
     }
 
-    const checkInDate = new Date(checkIn);
-    const checkOutDate = new Date(checkOut);
+    const parsedCheckIn = asDate(checkIn);
+    const parsedCheckOut = asDate(checkOut);
+    if (!parsedCheckIn || !parsedCheckOut) {
+      res.status(400).json({ error: 'Invalid check-in or check-out date' });
+      return;
+    }
 
-    if (checkInDate >= checkOutDate) {
+    const start = startOfUTCDay(parsedCheckIn);
+    const end = startOfUTCDay(parsedCheckOut);
+
+    if (start >= end) {
       res.status(400).json({ error: 'Check-out must be after check-in' });
       return;
     }
 
-    const { hasOverlap, conflictSource } = await checkOverlap(String(villa._id), checkInDate, checkOutDate);
+    const { hasOverlap, conflictSource } = await checkOverlap(String(villa._id), start, end);
     if (hasOverlap) {
       res.status(409).json({ error: `Dates unavailable: ${conflictSource}` });
       return;
     }
 
-    const nights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
-    const cleaningFee = 50;
-    const totalPrice = villa.pricePerNight * nights + cleaningFee;
+    const quote = await quoteStay(villa._id, villa.pricePerNight, start, end);
 
     const booking = await Booking.create({
       bookingRef: generateBookingRef(),
       villa: villa._id,
-      checkIn: checkInDate,
-      checkOut: checkOutDate,
-      nights,
+      checkIn: start,
+      checkOut: end,
+      nights: quote.nights,
       guests: guests || 1,
       guestName,
       guestEmail: guestEmail?.toLowerCase().trim() || '',
       guestPhone: guestPhone || '',
       specialRequests: specialRequests || '',
-      totalPrice,
-      cleaningFee,
-      serviceFee: 0,
+      totalPrice: quote.totalPrice,
+      cleaningFee: quote.cleaningFee,
+      serviceFee: quote.serviceFee,
       securityDeposit: villa.securityDeposit,
       status: 'Confirmed',
       source: 'Manual (Admin)',
@@ -377,8 +397,13 @@ router.delete('/villas/:id/images/:imageIndex', requireAuth, async (req: AuthReq
 
     const img = villa.images[index];
     if (img.url.startsWith('/uploads/')) {
-      const filePath = path.join(__dirname, '..', '..', img.url);
-      fs.unlink(filePath, () => {});
+      // Resolve then verify containment: `/uploads/../../etc/passwd` passes a
+      // naive prefix check but escapes the uploads directory.
+      const uploadsRoot = path.resolve(__dirname, '..', '..', 'uploads');
+      const filePath = path.resolve(__dirname, '..', '..', `.${img.url}`);
+      if (filePath.startsWith(uploadsRoot + path.sep)) {
+        fs.unlink(filePath, () => {});
+      }
     }
 
     villa.images.splice(index, 1);

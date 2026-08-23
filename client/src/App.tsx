@@ -22,6 +22,7 @@ import { MobileStickyBookCTA } from './components/MobileStickyBookCTA';
 import { PrivacyPolicyView } from './components/PrivacyPolicyView';
 import { TermsView } from './components/TermsView';
 import { fetchVillas } from './api';
+import { trackPageView, trackVillaView, trackBookingCompleted } from './lib/analytics';
 import type { Villa, Booking } from './types';
 
 const AdminDashboardModal = lazy(() => import('./components/AdminDashboardModal'));
@@ -35,6 +36,28 @@ const PAGE_TITLES: Record<string, string> = {
   privacy: 'Privacy Policy | PD Holiday Villas',
   terms: 'Terms & Conditions | PD Holiday Villas',
 };
+
+// Crawlers read the description of whatever tab is active, so it has to move
+// with the title rather than staying pinned to the homepage copy.
+const PAGE_DESCRIPTIONS: Record<string, string> = {
+  home: 'Book direct and save 18%. 5 authentic Balinese-inspired private pool & beachfront holiday villas in Port Dickson, Negeri Sembilan, Malaysia. 0% platform fee.',
+  villas: 'Browse all 5 Balinese-inspired holiday villas in Port Dickson — private pools, beachfront access, sleeps 4 to 12. Direct rates from RM1200 per night.',
+  about: 'A local guide to Port Dickson: Teluk Kemang, Cape Rachado, Blue Lagoon, beaches, food and things to do near our villas.',
+  stories: 'Travel stories and guest experiences from our Balinese-inspired beach villas in Port Dickson.',
+  rules: 'House rules for PD Holiday Villas — check-in times, pool safety, guest limits, and our cancellation policy.',
+  privacy: 'How PD Holiday Villas collects, uses, and protects your personal data.',
+  terms: 'Terms and conditions for booking a stay with PD Holiday Villas.',
+};
+
+function setMeta(selector: string, attr: 'name' | 'property', key: string, content: string) {
+  let el = document.head.querySelector<HTMLMetaElement>(selector);
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
 
 export default function App() {
   type TabKey = 'home' | 'villas' | 'about' | 'stories' | 'rules' | 'contact' | 'privacy' | 'terms';
@@ -74,7 +97,17 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.title = PAGE_TITLES[activeTab] || PAGE_TITLES.home;
+    const title = PAGE_TITLES[activeTab] || PAGE_TITLES.home;
+    const description = PAGE_DESCRIPTIONS[activeTab] || PAGE_DESCRIPTIONS.home;
+
+    document.title = title;
+    setMeta('meta[name="description"]', 'name', 'description', description);
+    setMeta('meta[property="og:title"]', 'property', 'og:title', title);
+    setMeta('meta[property="og:description"]', 'property', 'og:description', description);
+    setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', title);
+    setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description);
+
+    trackPageView(activeTab, title);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeTab]);
 
@@ -89,12 +122,22 @@ export default function App() {
   const handleOpenVillaDetail = (villa: Villa) => {
     setSelectedVilla(villa);
     setIsDetailModalOpen(true);
+    trackVillaView(villa.slug, villa.title, villa.pricePerNight);
   };
 
   const handleBookingConfirmed = (booking: Booking) => {
     setIsDetailModalOpen(false);
     setConfirmedBooking(booking);
     setIsConfirmModalOpen(true);
+
+    const villa = typeof booking.villa === 'object' ? booking.villa : null;
+    trackBookingCompleted(
+      booking.bookingRef,
+      villa?.slug ?? 'unknown',
+      villa?.title ?? 'unknown',
+      booking.totalPrice,
+      booking.nights
+    );
   };
 
   const filteredVillas = useMemo(() => {

@@ -1,4 +1,4 @@
-import ical from 'node-ical';
+import ical, { type VEvent } from 'node-ical';
 import Villa from '../models/Villa.js';
 import IcalBlock from '../models/IcalBlock.js';
 
@@ -15,8 +15,8 @@ export async function syncAllIcalFeeds(): Promise<{ villa: string; imported: num
         const events = await ical.async.fromURL(feed.url);
 
         for (const [, event] of Object.entries(events)) {
-          if (event.type !== 'VEVENT') continue;
-          const vevent = event as ical.VEvent;
+          if (!event || event.type !== 'VEVENT') continue;
+          const vevent = event as VEvent;
 
           if (!vevent.start || !vevent.end) continue;
 
