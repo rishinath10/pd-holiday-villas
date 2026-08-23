@@ -9,7 +9,7 @@ export const OurStoriesView: React.FC = () => {
     <section className="px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pt-4 sm:pt-6 space-y-8">
       <div className="text-center">
         <span className="inline-block px-4 py-1.5 rounded-full bg-[#ffdad2]/50 text-[#a53b22] text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-3">Travel Stories</span>
-        <h2 className="font-['Cormorant_Garamond',serif] text-2xl sm:text-4xl font-bold text-[#1A2A2B]">Stories & Guides</h2>
+        <h2 className="font-['EB_Garamond',serif] text-2xl sm:text-4xl font-bold text-[#1A2A2B]">Stories & Guides</h2>
         <p className="text-sm text-slate-600 mt-2 max-w-2xl mx-auto">Insider guides, local food trails, and sunset stories from Port Dickson.</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -20,7 +20,7 @@ export const OurStoriesView: React.FC = () => {
               <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/90 text-[10px] font-bold text-[#1A2A2B]">{story.category}</div>
             </div>
             <div className="p-4 flex-1 flex flex-col">
-              <h3 className="font-['Cormorant_Garamond',serif] text-lg font-bold mb-2 leading-snug">{story.title}</h3>
+              <h3 className="font-['EB_Garamond',serif] text-lg font-bold mb-2 leading-snug">{story.title}</h3>
               <p className="text-sm text-slate-600 mb-3 flex-1">{story.snippet}</p>
               <div className="flex items-center justify-between text-xs text-slate-500 mb-3">
                 <span className="flex items-center gap-1"><User className="w-3 h-3" />{story.author}</span>

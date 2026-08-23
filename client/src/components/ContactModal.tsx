@@ -17,7 +17,7 @@ export const ContactModal: React.FC<Props> = ({ isOpen, onClose }) => {
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in" onClick={onClose} />
       <div className="relative w-full max-w-md bg-[#FFF9F5] rounded-3xl shadow-2xl overflow-hidden animate-modal-slide-up">
         <div className="flex items-center justify-between p-5 border-b border-orange-100/50">
-          <h2 id="contact-modal-title" className="font-['Cormorant_Garamond',serif] text-xl font-bold">Contact Us</h2>
+          <h2 id="contact-modal-title" className="font-['EB_Garamond',serif] text-xl font-bold">Contact Us</h2>
           <button onClick={onClose} aria-label="Close contact dialog" className="p-2 rounded-full hover:bg-slate-100"><X className="w-5 h-5" /></button>
         </div>
         <div className="p-5 space-y-4">

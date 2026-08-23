@@ -231,7 +231,7 @@ export const HouseRulesView: React.FC<Props> = ({ onOpenContact, onExploreVillas
             <span>{language === 'ms' ? 'PANDUAN & PERATURAN VILA KAMI' : 'OUR VILLAS GUEST GUIDELINES & HOUSE RULES'}</span>
           </div>
 
-          <h1 className="font-['Cormorant_Garamond',serif] text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+          <h1 className="font-['EB_Garamond',serif] text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
             {language === 'ms' ? 'Peraturan Rumah & Panduan Penginapan' : 'House Rules & Guest Etiquette'}
           </h1>
 
@@ -335,7 +335,7 @@ export const HouseRulesView: React.FC<Props> = ({ onOpenContact, onExploreVillas
                     <IconComponent className="w-5 h-5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-['Cormorant_Garamond',serif] text-xl font-bold text-[#1A2A2B] leading-tight">
+                    <h3 className="font-['EB_Garamond',serif] text-xl font-bold text-[#1A2A2B] leading-tight">
                       {rule.title}
                     </h3>
                     <p className="font-['Jost',sans-serif] text-xs text-slate-500 font-medium mt-0.5">
@@ -393,7 +393,7 @@ export const HouseRulesView: React.FC<Props> = ({ onOpenContact, onExploreVillas
             <PhoneCall className="w-3.5 h-3.5" />
             <span>{language === 'ms' ? 'Bantuan & Kecemasan 24/7' : '24/7 Guest Assistance & Care'}</span>
           </div>
-          <h3 className="font-['Cormorant_Garamond',serif] text-2xl font-bold text-[#1A2A2B]">
+          <h3 className="font-['EB_Garamond',serif] text-2xl font-bold text-[#1A2A2B]">
             {language === 'ms' ? 'Perlukan Bantuan Semasa Menginap?' : 'Need Assistance During Your Stay?'}
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">

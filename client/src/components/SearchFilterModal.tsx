@@ -26,7 +26,7 @@ export const SearchFilterModal: React.FC<Props> = ({ isOpen, onClose, selectedCa
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in" onClick={onClose} />
       <div className="relative w-full max-w-md bg-[#FFF9F5] rounded-3xl shadow-2xl overflow-hidden animate-modal-slide-up">
         <div className="flex items-center justify-between p-5 border-b border-orange-100/50">
-          <div className="flex items-center gap-2"><SlidersHorizontal className="w-5 h-5 text-[#FF7E5F]" /><h2 className="font-['Cormorant_Garamond',serif] text-xl font-bold">Search & Filter</h2></div>
+          <div className="flex items-center gap-2"><SlidersHorizontal className="w-5 h-5 text-[#FF7E5F]" /><h2 className="font-['EB_Garamond',serif] text-xl font-bold">Search & Filter</h2></div>
           <button onClick={onClose} className="p-2 rounded-full hover:bg-slate-100"><X className="w-5 h-5" /></button>
         </div>
         <div className="p-5 space-y-5">

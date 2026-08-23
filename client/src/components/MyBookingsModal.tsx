@@ -52,7 +52,7 @@ export const MyBookingsModal: React.FC<Props> = ({ isOpen, onClose }) => {
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in" onClick={onClose} />
       <div className="relative w-full max-w-lg max-h-[85vh] bg-[#FFF9F5] rounded-3xl shadow-2xl overflow-hidden animate-modal-slide-up flex flex-col">
         <div className="flex items-center justify-between p-5 border-b border-orange-100/50">
-          <h2 id="bookings-modal-title" className="font-['Cormorant_Garamond',serif] text-xl font-bold">My Bookings</h2>
+          <h2 id="bookings-modal-title" className="font-['EB_Garamond',serif] text-xl font-bold">My Bookings</h2>
           <button onClick={onClose} aria-label="Close bookings dialog" className="p-2 rounded-full hover:bg-slate-100"><X className="w-5 h-5" /></button>
         </div>
 

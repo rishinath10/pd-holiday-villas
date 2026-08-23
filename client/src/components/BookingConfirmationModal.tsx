@@ -53,7 +53,7 @@ Please let me know how to proceed with the payment. Thank you!`
           <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto">
             <CheckCircle className="w-8 h-8 text-emerald-600" />
           </div>
-          <h2 className="font-['Cormorant_Garamond',serif] text-2xl font-bold text-[#1A2A2B]">Booking Submitted!</h2>
+          <h2 className="font-['EB_Garamond',serif] text-2xl font-bold text-[#1A2A2B]">Booking Submitted!</h2>
           <p className="text-sm text-slate-600">Your reservation details have been saved. Complete your booking by contacting Manager Jeff via WhatsApp to arrange payment.</p>
 
           <div className="bg-white rounded-2xl p-4 border border-orange-100/50 text-left space-y-3">

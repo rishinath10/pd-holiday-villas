@@ -39,7 +39,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
             <AlertTriangle className="w-7 h-7" />
           </div>
           <div className="space-y-2">
-            <h1 className="font-['Cormorant_Garamond',serif] text-2xl font-bold text-[#1A2A2B]">
+            <h1 className="font-['EB_Garamond',serif] text-2xl font-bold text-[#1A2A2B]">
               Something went wrong
             </h1>
             <p className="text-sm text-slate-500">
