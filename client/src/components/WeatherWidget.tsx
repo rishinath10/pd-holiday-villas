@@ -7,7 +7,17 @@ interface WeatherData {
   windSpeed: number;
   weatherCode: number;
   isDay: boolean;
+  uvIndex: number;
 }
+
+/** WMO UV bands. `strong` marks the levels worth actually reacting to. */
+const getUvLevel = (uv: number) => {
+  if (uv < 3) return { label: 'Low', strong: false };
+  if (uv < 6) return { label: 'Moderate', strong: false };
+  if (uv < 8) return { label: 'High', strong: true };
+  if (uv < 11) return { label: 'Very High', strong: true };
+  return { label: 'Extreme', strong: true };
+};
 
 const getWeatherInfo = (code: number, isDay: boolean) => {
   if (code <= 1) {
@@ -113,7 +123,7 @@ export const WeatherWidget: React.FC = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=2.52&longitude=101.80&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,is_day&timezone=Asia%2FKuala_Lumpur')
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=2.52&longitude=101.80&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,is_day,uv_index&timezone=Asia%2FKuala_Lumpur')
       .then(r => r.json())
       .then(data => {
         if (data.current) {
@@ -123,6 +133,7 @@ export const WeatherWidget: React.FC = () => {
             windSpeed: Math.round(data.current.wind_speed_10m),
             weatherCode: data.current.weather_code,
             isDay: data.current.is_day === 1,
+            uvIndex: Math.round(data.current.uv_index ?? 0),
           });
         }
       })
@@ -138,6 +149,8 @@ export const WeatherWidget: React.FC = () => {
   const { icon: WeatherIcon, label, theme } = getWeatherInfo(weather.weatherCode, weather.isDay);
   const style = themeStyles[theme];
   const beach = getBeachCondition(weather.weatherCode, weather.temperature);
+  const uv = getUvLevel(weather.uvIndex);
+  const showUv = weather.isDay && weather.uvIndex > 0;
 
   return (
     <section className="px-3 sm:px-6 lg:px-8 w-full flex justify-center">
@@ -159,9 +172,23 @@ export const WeatherWidget: React.FC = () => {
           <span className={`w-px self-stretch my-0.5 ${style.divider}`} aria-hidden="true" />
 
           <div className="flex items-center gap-1.5 shrink-0">
-            <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${style.pill} border text-[10px] sm:text-xs ${style.pillText} font-semibold whitespace-nowrap`}>
-              <Droplets className="w-3 h-3" />{weather.humidity}%
-            </div>
+            {/* UV reads 0 all night, so it only earns its slot in daylight;
+                humidity takes the same slot after dark. */}
+            {showUv ? (
+              <div
+                title={`UV index ${weather.uvIndex} — ${uv.label}`}
+                className={`flex items-center gap-1 px-2 py-1 rounded-lg border text-[10px] sm:text-xs font-semibold whitespace-nowrap ${
+                  uv.strong ? `${style.badge}` : `${style.pill} ${style.pillText}`
+                }`}
+              >
+                <Sun className="w-3 h-3" />UV {weather.uvIndex}
+                <span className="hidden lg:inline font-bold">&middot; {uv.label}</span>
+              </div>
+            ) : (
+              <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${style.pill} border text-[10px] sm:text-xs ${style.pillText} font-semibold whitespace-nowrap`}>
+                <Droplets className="w-3 h-3" />{weather.humidity}%
+              </div>
+            )}
             <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${style.pill} border text-[10px] sm:text-xs ${style.pillText} font-semibold whitespace-nowrap`}>
               <Wind className="w-3 h-3" />{weather.windSpeed}<span className="hidden sm:inline"> km/h</span>
             </div>
