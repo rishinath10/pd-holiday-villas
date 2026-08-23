@@ -22,7 +22,7 @@ export const GuestExperiencesSection: React.FC<Props> = ({ onSelectVilla, villas
       <div className="flex items-end justify-between mb-6 sm:mb-8">
         <div>
           <span className="inline-block px-4 py-1.5 rounded-full bg-[#def1f4] text-[#006a68] text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-3">Guest Experiences</span>
-          <h2 className="font-['EB_Garamond',serif] text-2xl sm:text-4xl font-bold text-[#1A2A2B]">What Our Guests Say</h2>
+          <h2 className="font-['Playfair_Display',serif] text-2xl sm:text-4xl font-bold text-[#1A2A2B]">What Our Guests Say</h2>
         </div>
         <div className="hidden sm:flex items-center gap-2">
           <button onClick={() => scroll('left')} className="w-9 h-9 rounded-full bg-white border border-slate-200 hover:border-[#FF7E5F] hover:bg-[#FF7E5F]/5 flex items-center justify-center transition-colors text-slate-500 hover:text-[#FF7E5F]">
@@ -56,7 +56,7 @@ export const GuestExperiencesSection: React.FC<Props> = ({ onSelectVilla, villas
               <span className="px-2 py-0.5 rounded-full bg-[#ffdad2]/50 text-[#a53b22] text-[9px] font-bold">{exp.highlightBadge}</span>
               <span className="text-[10px] text-slate-400">{exp.stayDate}</span>
             </div>
-            <h5 className="font-['EB_Garamond',serif] text-base font-bold mb-2 leading-snug">{exp.title}</h5>
+            <h5 className="font-['Playfair_Display',serif] text-base font-bold mb-2 leading-snug">{exp.title}</h5>
             <p className="text-sm text-slate-600 leading-relaxed flex-1 line-clamp-4">{exp.quote}</p>
             <div className="flex items-center justify-between mt-3 pt-3 border-t border-orange-100/50 text-[11px] text-slate-500">
               <button

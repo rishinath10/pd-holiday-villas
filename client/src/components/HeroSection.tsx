@@ -44,7 +44,7 @@ export const HeroSection: React.FC<Props> = ({ villas, onExploreVillas, onOpenCo
               <span className="text-white/90">{language === 'ms' ? '0% Caj Tempahan Terus' : '0% Direct Booking Fee'}</span>
             </div>
 
-            <h1 className="font-['EB_Garamond',serif] text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] animate-enter-up-d1">
+            <h1 className="font-['Playfair_Display',serif] text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] animate-enter-up-d1">
               {language === 'ms' ? 'Vila Berkonsepkan Bali Tepi Pantai' : 'Balinese-Inspired Beach Villas in'}{' '}
               <span className="bg-gradient-to-r from-[#FF7E5F] via-[#FEB47B] to-[#FFB800] bg-clip-text text-transparent italic">Port Dickson</span>
             </h1>
@@ -96,7 +96,7 @@ export const HeroSection: React.FC<Props> = ({ villas, onExploreVillas, onOpenCo
                 </div>
                 <div className="absolute bottom-2 left-2 right-2 flex items-end justify-between gap-2">
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-['EB_Garamond',serif] text-base sm:text-xl font-bold text-white leading-tight truncate">{currentVilla.title}</h3>
+                    <h3 className="font-['Playfair_Display',serif] text-base sm:text-xl font-bold text-white leading-tight truncate">{currentVilla.title}</h3>
                     <p className="text-[10.5px] text-white/80 flex items-center gap-1 mt-0.5 truncate"><MapPin className="w-3 h-3 text-[#FF7E5F] shrink-0" />{currentVilla.location}</p>
                   </div>
                   <div className="text-right shrink-0 bg-black/60 backdrop-blur-md px-2 py-1 rounded-xl border border-white/15">

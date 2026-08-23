@@ -134,7 +134,7 @@ export default function App() {
             <img src="/icon.png" alt="PD Holiday Villas" className="relative w-20 h-20 rounded-2xl shadow-xl object-contain" />
           </div>
           <div className="space-y-1">
-            <p className="font-['EB_Garamond',serif] text-xl font-bold text-[#1A2A2B]">PD Holiday Villas</p>
+            <p className="font-['Playfair_Display',serif] text-xl font-bold text-[#1A2A2B]">PD Holiday Villas</p>
             <p className="font-['Jost',sans-serif] text-sm text-[#1A2A2B]/50 font-medium">Discovering sunset villas...</p>
           </div>
         </div>

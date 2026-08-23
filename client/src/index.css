@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'EB Garamond', 'Cormorant Garamond', Garamond, serif;
+  --font-display: 'Playfair Display', 'EB Garamond', Georgia, serif;
   --font-body: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-script: 'Dancing Script', cursive;
   --color-sunset-coral: #FF7E5F;

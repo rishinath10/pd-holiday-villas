@@ -15,7 +15,7 @@ export const VillasCatalogView: React.FC<Props> = ({ villas, favorites, onToggle
   <section className="px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pt-4 sm:pt-6">
     <div className="text-center mb-6 sm:mb-8">
       <span className="inline-block px-4 py-1.5 rounded-full bg-[#ffdad2]/50 text-[#a53b22] text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-3">Balinese Architecture Collection</span>
-      <h2 className="font-['EB_Garamond',serif] text-2xl sm:text-4xl font-bold text-[#1A2A2B]">Balinese Villas in Port Dickson</h2>
+      <h2 className="font-['Playfair_Display',serif] text-2xl sm:text-4xl font-bold text-[#1A2A2B]">Balinese Villas in Port Dickson</h2>
       <p className="text-sm text-slate-600 mt-2 max-w-2xl mx-auto">Showing all {villas.length} Balinese-inspired coastal retreats featuring private stone pools, carved teakwood, and sunset vistas.</p>
     </div>
     {villas.length === 0 ? (

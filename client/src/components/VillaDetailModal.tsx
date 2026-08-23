@@ -83,7 +83,7 @@ export const VillaDetailModal: React.FC<Props> = ({ villa, isOpen, onClose, isFa
             <button onClick={() => onToggleFavorite(villa.slug)} className="p-2 rounded-full hover:bg-orange-50 transition-colors">
               <Heart className={`w-5 h-5 ${isFavorite ? 'fill-[#FF7E5F] text-[#FF7E5F]' : 'text-slate-400'}`} />
             </button>
-            <h2 className="font-['EB_Garamond',serif] text-xl sm:text-2xl font-bold text-[#1A2A2B]">{villa.title}</h2>
+            <h2 className="font-['Playfair_Display',serif] text-xl sm:text-2xl font-bold text-[#1A2A2B]">{villa.title}</h2>
           </div>
           <button onClick={onClose} className="p-2 rounded-full hover:bg-slate-100 transition-colors"><X className="w-5 h-5" /></button>
         </div>
@@ -114,7 +114,7 @@ export const VillaDetailModal: React.FC<Props> = ({ villa, isOpen, onClose, isFa
 
           {/* Highlights */}
           <div>
-            <h4 className="font-['EB_Garamond',serif] text-lg font-bold mb-3">Highlights</h4>
+            <h4 className="font-['Playfair_Display',serif] text-lg font-bold mb-3">Highlights</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {villa.highlights.map((h, i) => (
                 <div key={i} className="flex items-start gap-2 text-sm"><Sparkles className="w-4 h-4 text-[#FFB800] shrink-0 mt-0.5" />{h}</div>
@@ -124,7 +124,7 @@ export const VillaDetailModal: React.FC<Props> = ({ villa, isOpen, onClose, isFa
 
           {/* Amenities */}
           <div>
-            <h4 className="font-['EB_Garamond',serif] text-lg font-bold mb-3">Amenities</h4>
+            <h4 className="font-['Playfair_Display',serif] text-lg font-bold mb-3">Amenities</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {villa.amenities.map((a, i) => (
                 <div key={i} className="flex items-start gap-2 text-sm"><CheckCircle className="w-4 h-4 text-[#2EB5B2] shrink-0 mt-0.5" />{a}</div>
@@ -144,9 +144,9 @@ export const VillaDetailModal: React.FC<Props> = ({ villa, isOpen, onClose, isFa
           {/* Booking Section */}
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-orange-100/50 shadow-sm space-y-5">
             <div>
-              <h4 className="font-['EB_Garamond',serif] text-xl font-bold mb-1">{t.common.bookDirect}</h4>
+              <h4 className="font-['Playfair_Display',serif] text-xl font-bold mb-1">{t.common.bookDirect}</h4>
               <div className="flex items-baseline gap-2 text-sm">
-                <span className="text-2xl font-bold font-['EB_Garamond',serif]">RM{villa.pricePerNight}</span>
+                <span className="text-2xl font-bold font-['Playfair_Display',serif]">RM{villa.pricePerNight}</span>
                 <span className="text-slate-500">/{t.common.night}</span>
                 <span className="ml-auto text-emerald-600 font-bold text-xs">{t.common.zeroPlatformFee}</span>
               </div>

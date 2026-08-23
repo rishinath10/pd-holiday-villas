@@ -39,7 +39,7 @@ export const VillaCard: React.FC<VillaCardProps> = ({ villa, isFavorite, onToggl
             </a>
           )}
         </div>
-        <h3 onClick={() => onSelectVilla(villa)} className="font-['EB_Garamond',serif] text-2xl sm:text-3xl font-bold text-[#1A2A2B] group-hover:text-[#a53b22] transition-colors cursor-pointer leading-tight mb-2">
+        <h3 onClick={() => onSelectVilla(villa)} className="font-['Playfair_Display',serif] text-2xl sm:text-3xl font-bold text-[#1A2A2B] group-hover:text-[#a53b22] transition-colors cursor-pointer leading-tight mb-2">
           {villa.title}
         </h3>
         <p className="font-['Jost',sans-serif] text-sm text-[#57423d] font-medium line-clamp-2 leading-snug mb-5">
@@ -50,7 +50,7 @@ export const VillaCard: React.FC<VillaCardProps> = ({ villa, isFavorite, onToggl
         <div>
           <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">{t.common.from}</span>
           <div className="flex items-baseline gap-1">
-            <span className="font-['EB_Garamond',serif] text-2xl font-bold text-[#1A2A2B]">RM{villa.pricePerNight}</span>
+            <span className="font-['Playfair_Display',serif] text-2xl font-bold text-[#1A2A2B]">RM{villa.pricePerNight}</span>
             <span className="text-xs text-slate-500 font-semibold">/{t.common.night}</span>
           </div>
         </div>
