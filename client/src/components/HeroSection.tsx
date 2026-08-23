@@ -27,11 +27,13 @@ export const HeroSection: React.FC<Props> = ({ villas, onExploreVillas, onOpenCo
   return (
     <section className="px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pt-1 sm:pt-2">
       <div className="relative rounded-3xl sm:rounded-[2.5rem] overflow-hidden text-white p-4 sm:p-8 lg:p-10 shadow-2xl border border-teal-900/40">
-        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+        <div className="absolute inset-0 z-0 hero-gradient-bg">
+          <div className="hero-glow-orb hero-glow-orb--1" />
+          <div className="hero-glow-orb hero-glow-orb--2" />
+          <div className="hero-glow-orb hero-glow-orb--3" />
+        </div>
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/50 via-black/30 to-black/15" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/50 via-transparent to-black/10" />
 
         <div className="relative z-[2] grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           <div className="lg:col-span-7 space-y-3.5 sm:space-y-5">
