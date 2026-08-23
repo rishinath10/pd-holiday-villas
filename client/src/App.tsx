@@ -131,7 +131,7 @@ export default function App() {
           <div className="relative w-24 h-24 mx-auto">
             <div className="absolute inset-0 rounded-2xl border-4 border-[#2EB5B2]/20 animate-ping" />
             <div className="absolute inset-0 rounded-2xl border-4 border-transparent border-t-[#FF7E5F] border-r-[#2EB5B2] animate-spin" />
-            <img src="/logo-md.png" alt="PD Holiday Villas" className="relative w-24 h-24 rounded-2xl shadow-xl object-contain animate-pulse" />
+            <img src="/Asset 1.png" alt="PD Holiday Villas" className="relative w-24 h-24 rounded-2xl shadow-xl object-contain animate-pulse" />
           </div>
           <div className="space-y-1">
             <p className="font-['EB_Garamond',serif] text-xl font-bold text-[#1A2A2B]">PD Holiday Villas</p>
