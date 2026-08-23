@@ -35,6 +35,7 @@ const themeStyles = {
     pill: 'bg-white/20 border-white/25',
     pillText: 'text-white/90',
     badge: 'bg-yellow-400/25 text-yellow-100 border-yellow-300/30',
+    divider: 'bg-white/25',
   },
   night: {
     bg: 'bg-gradient-to-r from-indigo-900 via-slate-800 to-indigo-950',
@@ -44,6 +45,7 @@ const themeStyles = {
     pill: 'bg-white/10 border-white/15',
     pillText: 'text-slate-300',
     badge: 'bg-indigo-500/30 text-indigo-200 border-indigo-400/30',
+    divider: 'bg-white/15',
   },
   sunset: {
     bg: 'bg-gradient-to-r from-orange-500 via-rose-400 to-purple-500',
@@ -53,6 +55,7 @@ const themeStyles = {
     pill: 'bg-white/20 border-white/25',
     pillText: 'text-white/90',
     badge: 'bg-orange-400/30 text-orange-100 border-orange-300/30',
+    divider: 'bg-white/25',
   },
   cloudy: {
     bg: 'bg-gradient-to-r from-slate-400 via-slate-300 to-gray-400',
@@ -62,6 +65,7 @@ const themeStyles = {
     pill: 'bg-slate-700/15 border-slate-500/20',
     pillText: 'text-slate-600',
     badge: 'bg-slate-500/20 text-slate-700 border-slate-400/30',
+    divider: 'bg-slate-600/20',
   },
   'cloudy-day': {
     bg: 'bg-gradient-to-r from-sky-300 via-slate-200 to-sky-300',
@@ -71,6 +75,7 @@ const themeStyles = {
     pill: 'bg-slate-700/10 border-slate-400/20',
     pillText: 'text-slate-600',
     badge: 'bg-sky-500/15 text-sky-700 border-sky-400/25',
+    divider: 'bg-slate-500/20',
   },
   rain: {
     bg: 'bg-gradient-to-r from-slate-600 via-blue-700 to-slate-700',
@@ -80,6 +85,7 @@ const themeStyles = {
     pill: 'bg-white/15 border-white/20',
     pillText: 'text-blue-100',
     badge: 'bg-blue-400/25 text-blue-200 border-blue-300/30',
+    divider: 'bg-white/20',
   },
   storm: {
     bg: 'bg-gradient-to-r from-slate-800 via-purple-900 to-slate-900',
@@ -89,6 +95,7 @@ const themeStyles = {
     pill: 'bg-white/10 border-white/15',
     pillText: 'text-purple-200',
     badge: 'bg-purple-500/25 text-purple-200 border-purple-400/30',
+    divider: 'bg-white/15',
   },
 };
 
@@ -133,29 +140,33 @@ export const WeatherWidget: React.FC = () => {
   const beach = getBeachCondition(weather.weatherCode, weather.temperature);
 
   return (
-    <section className="px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-      <div className={`${style.bg} rounded-2xl px-3.5 sm:px-5 py-2.5 sm:py-3 shadow-md border border-white/10 w-full transition-all duration-500`}>
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-            <WeatherIcon className={`w-8 h-8 sm:w-9 sm:h-9 shrink-0 ${style.icon}`} />
-            <div className="min-w-0">
+    <section className="px-3 sm:px-6 lg:px-8 w-full flex justify-center">
+      {/* Sized to its own content rather than the hero's full width, so the
+          row stays a tight strip instead of a bar with a hole in the middle. */}
+      <div className={`${style.bg} rounded-2xl px-3.5 sm:px-4 py-2 shadow-md border border-white/10 max-w-full transition-all duration-500`}>
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+            <WeatherIcon className={`w-7 h-7 sm:w-8 sm:h-8 shrink-0 ${style.icon}`} />
+            <div className="min-w-0 leading-tight">
               <div className="flex items-baseline gap-1.5">
-                <span className={`text-xl sm:text-2xl font-extrabold ${style.text}`}>{weather.temperature}°</span>
-                <span className={`text-xs sm:text-sm font-semibold ${style.sub}`}>{label}</span>
+                <span className={`text-lg sm:text-xl font-extrabold ${style.text}`}>{weather.temperature}°</span>
+                <span className={`text-xs sm:text-[13px] font-semibold ${style.sub} whitespace-nowrap`}>{label}</span>
               </div>
-              <p className={`text-[10px] sm:text-[11px] font-medium ${style.sub} truncate`}>Port Dickson &bull; Live</p>
+              <p className={`text-[10px] font-medium ${style.sub} whitespace-nowrap`}>Port Dickson &bull; Live</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${style.pill} border text-[10px] sm:text-xs ${style.pillText} font-semibold`}>
+          <span className={`w-px self-stretch my-0.5 ${style.divider}`} aria-hidden="true" />
+
+          <div className="flex items-center gap-1.5 shrink-0">
+            <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${style.pill} border text-[10px] sm:text-xs ${style.pillText} font-semibold whitespace-nowrap`}>
               <Droplets className="w-3 h-3" />{weather.humidity}%
             </div>
-            <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${style.pill} border text-[10px] sm:text-xs ${style.pillText} font-semibold`}>
+            <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${style.pill} border text-[10px] sm:text-xs ${style.pillText} font-semibold whitespace-nowrap`}>
               <Wind className="w-3 h-3" />{weather.windSpeed}<span className="hidden sm:inline"> km/h</span>
             </div>
             {beach && (
-              <div className={`hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-lg ${style.badge} border text-[11px] font-bold`}>
+              <div className={`hidden md:flex items-center gap-1 px-2.5 py-1 rounded-lg ${style.badge} border text-[11px] font-bold whitespace-nowrap`}>
                 <Sun className="w-3 h-3" />{beach}
               </div>
             )}

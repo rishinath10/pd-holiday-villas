@@ -169,17 +169,37 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#eafdff]">
-        <div className="text-center space-y-5">
-          <div className="relative w-20 h-20 mx-auto">
-            <div className="absolute -inset-2 rounded-2xl border-[3px] border-[#2EB5B2]/15 animate-ping" />
-            <div className="absolute -inset-2 rounded-2xl border-[3px] border-transparent border-t-[#FF7E5F] border-r-[#2EB5B2] animate-spin" style={{ animationDuration: '1.2s' }} />
-            <img src="/icon.png" alt="PD Holiday Villas" className="relative w-20 h-20 rounded-2xl shadow-xl object-contain" />
+      <div className="min-h-screen flex items-center justify-center bg-[#eafdff] px-6" role="status" aria-live="polite">
+        <div className="text-center flex flex-col items-center gap-7">
+          {/* Ripples spread from behind the mark, like a stone dropped in the pool */}
+          <div className="relative w-24 h-24 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+              <div className="relative w-24 h-24">
+                <span className="preloader-ripple" />
+                <span className="preloader-ripple" />
+                <span className="preloader-ripple" />
+                <span className="preloader-ripple" />
+              </div>
+            </div>
+            <img
+              src="/icon.png"
+              alt=""
+              width={72}
+              height={72}
+              className="preloader-mark relative w-[72px] h-[72px] rounded-2xl object-contain drop-shadow-lg"
+            />
           </div>
-          <div className="space-y-1">
-            <p className="font-['EB_Garamond',serif] text-xl font-bold text-[#1A2A2B]">PD Holiday Villas</p>
-            <p className="font-['Jost',sans-serif] text-sm text-[#1A2A2B]/50 font-medium">Discovering sunset villas...</p>
+
+          <div className="space-y-1.5">
+            <p className="font-['EB_Garamond',serif] text-2xl font-bold tracking-tight text-[#1A2A2B]">
+              PD Holiday Villas
+            </p>
+            <p className="font-['Jost',sans-serif] text-[13px] text-[#1A2A2B]/45 font-medium tracking-wide">
+              Preparing your seaside escape
+            </p>
           </div>
+
+          <div className="preloader-track w-40 h-[3px]" aria-hidden="true" />
         </div>
       </div>
     );
