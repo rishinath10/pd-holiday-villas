@@ -44,9 +44,9 @@ export const HeroSection: React.FC<Props> = ({ villas, onExploreVillas, onOpenCo
               <span className="text-white/90">{language === 'ms' ? '0% Caj Tempahan Terus' : '0% Direct Booking Fee'}</span>
             </div>
 
-            <h1 className="font-['Playfair_Display',serif] text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] animate-enter-up-d1">
+            <h1 className="font-['Playfair_Display',serif] text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
               {language === 'ms' ? 'Vila Berkonsepkan Bali Tepi Pantai' : 'Balinese-Inspired Beach Villas in'}{' '}
-              <span className="bg-gradient-to-r from-[#FF7E5F] via-[#FEB47B] to-[#FFB800] bg-clip-text text-transparent italic">Port Dickson</span>
+              <span className="bg-gradient-to-r from-[#FF7E5F] via-[#FEB47B] to-[#FFB800] bg-clip-text text-transparent italic [-webkit-backface-visibility:hidden] [backface-visibility:hidden]">Port Dickson</span>
             </h1>
 
             <p className="text-[13px] sm:text-base text-white/90 font-medium leading-relaxed max-w-xl animate-enter-up-d2">
