@@ -166,29 +166,21 @@ export default function App() {
               onSelectVilla={handleOpenVillaDetail}
             />
             <WeatherWidget />
-            <div className="animate-enter-up">
-              <OTAChannelsCarousel />
-            </div>
-            <div className="animate-enter-up-d1">
-              <HomeBentoGrid
-                villas={villas}
-                favorites={favorites}
-                onToggleFavorite={handleToggleFavorite}
-                onSelectVilla={handleOpenVillaDetail}
-                onBookDirect={handleOpenVillaDetail}
-                onNavigateTab={navigateTo}
-                onOpenContact={() => setIsContactModalOpen(true)}
-              />
-            </div>
-            <div className="animate-enter-up-d2">
-              <GuestExperiencesSection
-                onSelectVilla={handleOpenVillaDetail}
-                villas={villas}
-              />
-            </div>
-            <div className="animate-enter-up-d3">
-              <HomeHouseRulesSection onNavigateToRules={() => setActiveTab('rules')} />
-            </div>
+            <OTAChannelsCarousel />
+            <HomeBentoGrid
+              villas={villas}
+              favorites={favorites}
+              onToggleFavorite={handleToggleFavorite}
+              onSelectVilla={handleOpenVillaDetail}
+              onBookDirect={handleOpenVillaDetail}
+              onNavigateTab={navigateTo}
+              onOpenContact={() => setIsContactModalOpen(true)}
+            />
+            <GuestExperiencesSection
+              onSelectVilla={handleOpenVillaDetail}
+              villas={villas}
+            />
+            <HomeHouseRulesSection onNavigateToRules={() => setActiveTab('rules')} />
           </div>
         )}
 

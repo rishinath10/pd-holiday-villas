@@ -37,7 +37,7 @@ export const HeroSection: React.FC<Props> = ({ villas, onExploreVillas, onOpenCo
 
         <div className="relative z-[2] grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           <div className="lg:col-span-7 space-y-3.5 sm:space-y-5">
-            <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-[10.5px] sm:text-xs font-bold border border-white/15 animate-enter-up">
+            <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-[10.5px] sm:text-xs font-bold border border-white/15">
               <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
               <span className="text-[#FFECA8]">{language === 'ms' ? '5 Vila Berkonsepkan Bali' : '5 Balinese Beach Villas'}</span>
               <span className="text-white/30 hidden xs:inline">&bull;</span>
@@ -49,13 +49,13 @@ export const HeroSection: React.FC<Props> = ({ villas, onExploreVillas, onOpenCo
               <span className="bg-gradient-to-r from-[#FF7E5F] via-[#FEB47B] to-[#FFB800] bg-clip-text text-transparent italic [-webkit-backface-visibility:hidden] [backface-visibility:hidden]">Port Dickson</span>
             </h1>
 
-            <p className="text-[13px] sm:text-base text-white/90 font-medium leading-relaxed max-w-xl animate-enter-up-d2">
+            <p className="text-[13px] sm:text-base text-white/90 font-medium leading-relaxed max-w-xl">
               {language === 'ms'
                 ? 'Koleksi 5 buah vila peribadi berkonsepkan Bali eksklusif di Teluk Kemang & Pantai Cahaya Negeri. Dilengkapi kolam batu Sukabumi semula jadi, ukiran kayu jati mewah, dan akses terus ke pantai.'
                 : 'Direct reservations for 5 authentic Balinese-inspired private holiday villas across Teluk Kemang & Pantai Cahaya Negeri. Featuring volcanic Sukabumi stone pools, hand-carved teakwood pavilions, and direct sunset beach access.'}
             </p>
 
-            <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5 pt-0.5 animate-enter-up-d3">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5 pt-0.5">
               {[
                 { icon: Waves, label: language === 'ms' ? 'Konsep Bali' : 'Balinese', sub: language === 'ms' ? 'Kayu Jati' : 'Teak & Stone', color: 'text-[#FF7E5F]', bg: 'bg-[#FF7E5F]/20' },
                 { icon: Sparkles, label: language === 'ms' ? 'Kolam Batu' : 'Stone Pool', sub: language === 'ms' ? 'Sukabumi' : 'Private Pool', color: 'text-[#2EB5B2]', bg: 'bg-[#2EB5B2]/20' },
@@ -68,7 +68,7 @@ export const HeroSection: React.FC<Props> = ({ villas, onExploreVillas, onOpenCo
               ))}
             </div>
 
-            <div className="pt-1.5 flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 w-full animate-enter-up-d4">
+            <div className="pt-1.5 flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 w-full">
               <button onClick={onExploreVillas} className="w-full sm:w-auto px-6 py-3 sm:py-3.5 rounded-full bg-[#FF7E5F] hover:bg-[#a53b22] text-white text-sm sm:text-base font-bold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]">
                 <span>{language === 'ms' ? 'Terokai Vila Kami' : 'Explore Our Villas'}</span><ArrowRight className="w-4 h-4" />
               </button>
@@ -79,7 +79,7 @@ export const HeroSection: React.FC<Props> = ({ villas, onExploreVillas, onOpenCo
           </div>
 
           {/* Right: Villa Spotlight */}
-          <div className="lg:col-span-5 animate-enter-scale">
+          <div className="lg:col-span-5">
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-white/10 backdrop-blur-xl border border-white/20 p-3.5 sm:p-5 shadow-2xl space-y-3">
               <div className="flex items-center justify-between">
                 <span className="px-3 py-1 rounded-full bg-[#ffdad2]/80 text-[#a53b22] text-[10.5px] font-bold uppercase tracking-wider">Sleeps {currentVilla.sleepsCount}</span>
