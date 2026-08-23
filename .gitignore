@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Build output
+client/dist/
+server/dist/
+
+# Uploads (user-generated content)
+server/uploads/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Prototype source (dev only)
+prototype-src/
+
+# Claude Code
+.claude/
+
+# Design source files
+*.psd
+*.ai
+*.zip
+
+# Root-level asset exports (keep only public/ copies)
+/Asset 1.png
+/PDHV-CTA-1.jpg
+/PDHV-CTA.jpg
+/PDHV-Logo-white.jpg

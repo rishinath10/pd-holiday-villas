@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <clipPath id="fav-clip">
+      <rect x="0" y="0" width="200" height="200" rx="44" ry="44" />
+    </clipPath>
+    <linearGradient id="fav-sky" x1="100" y1="0" x2="100" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#1E9BE8" />
+      <stop offset="45%" stopColor="#48C3F4" />
+      <stop offset="75%" stopColor="#89DCFA" />
+      <stop offset="100%" stopColor="#DDF6FE" />
+    </linearGradient>
+    <radialGradient id="fav-sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stopColor="#FF4D15" />
+      <stop offset="35%" stopColor="#FF8324" />
+      <stop offset="75%" stopColor="#FFBA38" />
+      <stop offset="100%" stopColor="#FFDF6D" />
+    </radialGradient>
+    <radialGradient id="fav-sunglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
+      <stop offset="40%" stopColor="#FFECA8" stopOpacity="0.5" />
+      <stop offset="100%" stopColor="#FFE082" stopOpacity="0" />
+    </radialGradient>
+    <linearGradient id="fav-sand" x1="0" y1="120" x2="100" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#F59E0B" />
+      <stop offset="40%" stopColor="#FBBF24" />
+      <stop offset="70%" stopColor="#FDE68A" />
+      <stop offset="100%" stopColor="#D97706" />
+    </linearGradient>
+    <linearGradient id="fav-wave" x1="20" y1="100" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#0284C7" />
+      <stop offset="40%" stopColor="#0EA5E9" />
+      <stop offset="75%" stopColor="#38BDF8" />
+      <stop offset="100%" stopColor="#7DD3FC" />
+    </linearGradient>
+    <linearGradient id="fav-wave-shadow" x1="100" y1="120" x2="100" y2="170" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#0369A1" stopOpacity="0.9" />
+      <stop offset="100%" stopColor="#0284C7" stopOpacity="0.4" />
+    </linearGradient>
+    <linearGradient id="fav-villa-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#FFFFFF" />
+      <stop offset="100%" stopColor="#E2E8F0" />
+    </linearGradient>
+  </defs>
+
+  <g clip-path="url(#fav-clip)">
+    <rect width="200" height="200" fill="url(#fav-sky)" />
+    <!-- Distant Clouds -->
+    <path d="M 60 70 C 65 60, 85 60, 92 68 C 98 62, 115 63, 120 70 C 130 70, 140 76, 138 86 C 135 92, 110 94, 60 92 Z" fill="#FFFFFF" fill-opacity="0.85" />
+    <path d="M 120 45 C 124 38, 140 38, 145 44 C 150 40, 165 41, 168 47 C 176 47, 184 52, 182 60 C 180 65, 160 67, 120 65 Z" fill="#FFFFFF" fill-opacity="0.6" />
+    <!-- Golden Sun -->
+    <circle cx="118" cy="46" r="32" fill="url(#fav-sunglow)" />
+    <circle cx="118" cy="46" r="21" fill="url(#fav-sun)" />
+    <!-- Left Palms -->
+    <path d="M 0 160 Q 18 100 28 65 Q 26 65 24 160 Z" fill="#78350F" opacity="0.9" />
+    <path d="M 12 160 Q 28 115 42 85 Q 40 85 36 160 Z" fill="#92400E" opacity="0.8" />
+    <path d="M 28 65 Q 10 40 -8 50 Q 15 58 28 65 Z" fill="#15803D" />
+    <path d="M 28 65 Q 20 30 10 32 Q 22 48 28 65 Z" fill="#16A34A" />
+    <path d="M 28 65 Q 35 30 48 38 Q 38 52 28 65 Z" fill="#22C55E" />
+    <path d="M 28 65 Q 50 48 58 66 Q 44 68 28 65 Z" fill="#15803D" />
+    <path d="M 28 65 Q 0 65 -12 80 Q 8 78 28 65 Z" fill="#166534" />
+    <path d="M 42 85 Q 55 60 70 68 Q 58 78 42 85 Z" fill="#16A34A" />
+    <path d="M 42 85 Q 32 60 20 68 Q 30 78 42 85 Z" fill="#15803D" />
+    <!-- Villa -->
+    <rect x="18" y="112" width="105" height="4" fill="#0F172A" opacity="0.4" rx="2" />
+    <rect x="22" y="90" width="98" height="24" fill="url(#fav-villa-wall)" />
+    <polygon points="18,72 124,72 118,65 24,65" fill="#1E293B" />
+    <rect x="20" y="70" width="102" height="3" fill="#334155" />
+    <rect x="25" y="73" width="92" height="18" fill="#F8FAFC" />
+    <rect x="24" y="83" width="94" height="7" fill="#38BDF8" fill-opacity="0.4" stroke="#CBD5E1" stroke-width="0.8" />
+    <line x1="45" y1="83" x2="45" y2="90" stroke="#94A3B8" stroke-width="0.8" />
+    <line x1="70" y1="83" x2="70" y2="90" stroke="#94A3B8" stroke-width="0.8" />
+    <line x1="95" y1="83" x2="95" y2="90" stroke="#94A3B8" stroke-width="0.8" />
+    <rect x="28" y="74" width="26" height="8" fill="#0F172A" />
+    <rect x="29" y="75" width="11" height="6" fill="#FDE047" fill-opacity="0.9" />
+    <rect x="42" y="75" width="11" height="6" fill="#FBBF24" fill-opacity="0.8" />
+    <rect x="58" y="74" width="28" height="8" fill="#0F172A" />
+    <rect x="59" y="75" width="12" height="6" fill="#67E8F9" fill-opacity="0.7" />
+    <rect x="73" y="75" width="12" height="6" fill="#FDE047" fill-opacity="0.8" />
+    <rect x="28" y="93" width="30" height="20" fill="#0F172A" />
+    <rect x="30" y="94" width="12" height="18" fill="#FEF08A" />
+    <rect x="44" y="94" width="12" height="18" fill="#FDE047" />
+    <rect x="64" y="93" width="50" height="20" fill="#0F172A" />
+    <rect x="66" y="94" width="21" height="18" fill="#FDE047" fill-opacity="0.9" />
+    <rect x="90" y="94" width="22" height="18" fill="#BAE6FD" fill-opacity="0.8" />
+    <!-- Swimming Pool -->
+    <polygon points="26,116 116,116 110,128 32,128" fill="#0284C7" />
+    <polygon points="30,117 112,117 107,126 35,126" fill="#38BDF8" fill-opacity="0.85" />
+    <!-- Wave -->
+    <path d="M 60 126 Q 140 120 200 132 L 200 200 L 0 200 Q 10 160 60 126 Z" fill="url(#fav-wave-shadow)" />
+    <path d="M 0 200 C 40 190 70 160 100 145 C 135 128 180 136 200 148 L 200 200 Z" fill="url(#fav-wave)" />
+    <path d="M 65 158 C 75 142 95 130 115 132 C 128 133 140 140 152 145 C 138 140 120 142 108 148 C 92 156 82 170 65 178 C 58 174 58 165 65 158 Z" fill="#FFFFFF" />
+    <!-- Sand Dune -->
+    <path d="M 0 140 C 35 145 60 175 75 200 L 0 200 Z" fill="url(#fav-sand)" />
+  </g>
+</svg>
