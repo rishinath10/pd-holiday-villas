@@ -21,6 +21,7 @@ import { CookieBanner } from './components/CookieBanner';
 import { MobileStickyBookCTA } from './components/MobileStickyBookCTA';
 import { PrivacyPolicyView } from './components/PrivacyPolicyView';
 import { TermsView } from './components/TermsView';
+import { AboutUsView } from './components/AboutUsView';
 import { fetchVillas } from './api';
 import { trackPageView, trackVillaView, trackBookingCompleted } from './lib/analytics';
 import type { Villa, Booking } from './types';
@@ -35,6 +36,7 @@ const PAGE_TITLES: Record<string, string> = {
   rules: 'House Rules | PD Holiday Villas',
   privacy: 'Privacy Policy | PD Holiday Villas',
   terms: 'Terms & Conditions | PD Holiday Villas',
+  aboutus: 'About Us | PD Holiday Villas',
 };
 
 // Crawlers read the description of whatever tab is active, so it has to move
@@ -47,6 +49,7 @@ const PAGE_DESCRIPTIONS: Record<string, string> = {
   rules: 'House rules for PD Holiday Villas — check-in times, pool safety, guest limits, and our cancellation policy.',
   privacy: 'How PD Holiday Villas collects, uses, and protects your personal data.',
   terms: 'Terms and conditions for booking a stay with PD Holiday Villas.',
+  aboutus: 'PD Holiday Villas Sdn. Bhd. — an SSM-registered Malaysian company operating five privately owned luxury holiday villas in Port Dickson since 2020.',
 };
 
 function setMeta(selector: string, attr: 'name' | 'property', key: string, content: string) {
@@ -60,7 +63,7 @@ function setMeta(selector: string, attr: 'name' | 'property', key: string, conte
 }
 
 export default function App() {
-  type TabKey = 'home' | 'villas' | 'about' | 'stories' | 'rules' | 'contact' | 'privacy' | 'terms';
+  type TabKey = 'home' | 'villas' | 'about' | 'stories' | 'rules' | 'contact' | 'privacy' | 'terms' | 'aboutus';
   const [activeTab, setActiveTab] = useState<TabKey>('home');
   const navigateTo = (tab: string) => setActiveTab(tab as TabKey);
   const [villas, setVillas] = useState<Villa[]>([]);
@@ -267,6 +270,7 @@ export default function App() {
         )}
         {activeTab === 'privacy' && <PrivacyPolicyView />}
         {activeTab === 'terms' && <TermsView />}
+        {activeTab === 'aboutus' && <AboutUsView />}
       </main>
 
       <Footer

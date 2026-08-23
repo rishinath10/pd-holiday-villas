@@ -61,6 +61,7 @@ export const Footer: React.FC<Props> = ({ onNavigateTab, onOpenContact, onOpenFa
             <h4 className="text-xs font-bold uppercase tracking-wider text-white/40">Contact & Legal</h4>
             <div className="space-y-2">
               <button onClick={onOpenContact} className="flex items-center gap-2 py-1.5 text-sm text-white/70 hover:text-white transition-colors"><MessageCircle className="w-3.5 h-3.5" />{t.nav.contact}</button>
+              <button onClick={() => onNavigateTab('aboutus')} className="flex items-center gap-2 py-1.5 text-sm text-white/70 hover:text-white transition-colors"><Building2 className="w-3.5 h-3.5" />About Us</button>
               <button onClick={() => onNavigateTab('privacy')} className="flex items-center gap-2 py-1.5 text-sm text-white/70 hover:text-white transition-colors"><Shield className="w-3.5 h-3.5" />Privacy Policy</button>
               <button onClick={() => onNavigateTab('terms')} className="flex items-center gap-2 py-1.5 text-sm text-white/70 hover:text-white transition-colors"><ScrollText className="w-3.5 h-3.5" />Terms & Conditions</button>
               <button onClick={onOpenAdmin} className="flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors text-[11px]"><Shield className="w-3 h-3" />Admin</button>
