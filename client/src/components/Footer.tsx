@@ -18,7 +18,7 @@ export const Footer: React.FC<Props> = ({ onNavigateTab, onOpenContact, onOpenFa
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
           <div className="col-span-2 sm:col-span-1 space-y-3">
             <div className="flex items-center gap-2">
-              <img src="/PDHV logo png.png" alt="PD Holiday Villas logo" className="w-10 h-10 rounded-xl shadow-md object-contain" />
+              <img src="/logo-sm.png" alt="PD Holiday Villas logo" className="w-10 h-10 rounded-xl shadow-md object-contain" />
               <div>
                 <span className="font-['EB_Garamond',serif] text-base font-bold tracking-tight block">PD HOLIDAY</span>
                 <span className="font-['Dancing_Script',cursive] text-sm text-[#2EB5B2]">Villas</span>

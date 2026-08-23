@@ -325,7 +325,7 @@ function AdminDashboardModal({ isOpen, onClose, villas, onVillasChanged }: Props
         <button onClick={onClose} className="absolute top-4 left-4 flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors"><ArrowLeft className="w-4 h-4" />Back to website</button>
         <div className="w-full max-w-sm bg-[#FFF9F5] rounded-3xl shadow-2xl overflow-hidden animate-modal-slide-up p-6 sm:p-8">
           <div className="text-center space-y-4">
-            <img src="/PDHV logo png.png" alt="PD Holiday Villas" className="w-20 h-20 rounded-2xl shadow-lg object-contain mx-auto" />
+            <img src="/logo-sm.png" alt="PD Holiday Villas" className="w-20 h-20 rounded-2xl shadow-lg object-contain mx-auto" />
             <h2 className="font-['EB_Garamond',serif] text-2xl font-bold">Admin Portal</h2>
             <p className="text-sm text-slate-500">PD Holiday Villas Management Console</p>
           </div>
@@ -349,7 +349,7 @@ function AdminDashboardModal({ isOpen, onClose, villas, onVillasChanged }: Props
         <div className="max-w-[1400px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button onClick={onClose} className="p-2 rounded-full hover:bg-white/10 text-white/60 hover:text-white transition-colors" title="Back to website"><ArrowLeft className="w-5 h-5" /></button>
-            <img src="/PDHV logo png.png" alt="PD Holiday Villas" className="w-8 h-8 rounded-lg object-contain" />
+            <img src="/logo-sm.png" alt="PD Holiday Villas" className="w-8 h-8 rounded-lg object-contain" />
             <div className="hidden sm:block"><h1 className="font-['EB_Garamond',serif] text-lg font-bold leading-tight">Admin Center</h1><p className="text-[11px] text-white/50">{admin?.name} &mdash; {admin?.email}</p></div>
           </div>
           <div className="flex items-center gap-2">
