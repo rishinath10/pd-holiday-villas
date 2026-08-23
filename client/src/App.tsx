@@ -128,10 +128,10 @@ export default function App() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#eafdff]">
         <div className="text-center space-y-5">
-          <div className="relative w-24 h-24 mx-auto">
-            <div className="absolute inset-0 rounded-2xl border-4 border-[#2EB5B2]/20 animate-ping" />
-            <div className="absolute inset-0 rounded-2xl border-4 border-transparent border-t-[#FF7E5F] border-r-[#2EB5B2] animate-spin" />
-            <img src="/Asset 1.png" alt="PD Holiday Villas" className="relative w-24 h-24 rounded-2xl shadow-xl object-contain animate-pulse" />
+          <div className="relative w-20 h-20 mx-auto">
+            <div className="absolute -inset-2 rounded-2xl border-[3px] border-[#2EB5B2]/15 animate-ping" />
+            <div className="absolute -inset-2 rounded-2xl border-[3px] border-transparent border-t-[#FF7E5F] border-r-[#2EB5B2] animate-spin" style={{ animationDuration: '1.2s' }} />
+            <img src="/icon.png" alt="PD Holiday Villas" className="relative w-20 h-20 rounded-2xl shadow-xl object-contain" />
           </div>
           <div className="space-y-1">
             <p className="font-['EB_Garamond',serif] text-xl font-bold text-[#1A2A2B]">PD Holiday Villas</p>

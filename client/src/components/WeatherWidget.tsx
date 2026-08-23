@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Cloud, CloudRain, CloudDrizzle, CloudLightning, CloudSnow, Wind, Droplets } from 'lucide-react';
+import { Sun, Moon, Cloud, CloudRain, CloudDrizzle, CloudLightning, CloudSnow, Wind, Droplets, Sunrise } from 'lucide-react';
 
 interface WeatherData {
   temperature: number;
@@ -9,16 +9,96 @@ interface WeatherData {
   isDay: boolean;
 }
 
-const getWeatherIcon = (code: number) => {
-  if (code <= 1) return { icon: Sun, label: 'Sunny', color: 'text-amber-400' };
-  if (code <= 3) return { icon: Cloud, label: 'Partly Cloudy', color: 'text-slate-300' };
-  if (code <= 48) return { icon: Cloud, label: 'Cloudy', color: 'text-slate-400' };
-  if (code <= 57) return { icon: CloudDrizzle, label: 'Drizzle', color: 'text-blue-300' };
-  if (code <= 67) return { icon: CloudRain, label: 'Rainy', color: 'text-blue-400' };
-  if (code <= 77) return { icon: CloudSnow, label: 'Snowy', color: 'text-blue-200' };
-  if (code <= 82) return { icon: CloudRain, label: 'Showers', color: 'text-blue-500' };
-  if (code <= 99) return { icon: CloudLightning, label: 'Thunderstorm', color: 'text-purple-400' };
-  return { icon: Sun, label: 'Clear', color: 'text-amber-400' };
+const getWeatherInfo = (code: number, isDay: boolean) => {
+  if (code <= 1) {
+    if (!isDay) return { icon: Moon, label: 'Clear Night', theme: 'night' as const };
+    const hour = new Date().getHours();
+    if (hour >= 17 && hour < 19) return { icon: Sunrise, label: 'Sunset', theme: 'sunset' as const };
+    return { icon: Sun, label: 'Sunny', theme: 'day' as const };
+  }
+  if (code <= 3) return { icon: Cloud, label: 'Partly Cloudy', theme: isDay ? 'cloudy-day' as const : 'night' as const };
+  if (code <= 48) return { icon: Cloud, label: 'Cloudy', theme: 'cloudy' as const };
+  if (code <= 57) return { icon: CloudDrizzle, label: 'Drizzle', theme: 'rain' as const };
+  if (code <= 67) return { icon: CloudRain, label: 'Rainy', theme: 'rain' as const };
+  if (code <= 77) return { icon: CloudSnow, label: 'Snowy', theme: 'rain' as const };
+  if (code <= 82) return { icon: CloudRain, label: 'Showers', theme: 'rain' as const };
+  if (code <= 99) return { icon: CloudLightning, label: 'Thunderstorm', theme: 'storm' as const };
+  return { icon: Sun, label: 'Clear', theme: isDay ? 'day' as const : 'night' as const };
+};
+
+const themeStyles = {
+  day: {
+    bg: 'bg-gradient-to-r from-sky-400 via-sky-300 to-blue-400',
+    icon: 'text-yellow-300 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]',
+    text: 'text-white',
+    sub: 'text-white/70',
+    pill: 'bg-white/20 border-white/25',
+    pillText: 'text-white/90',
+    badge: 'bg-yellow-400/25 text-yellow-100 border-yellow-300/30',
+  },
+  night: {
+    bg: 'bg-gradient-to-r from-indigo-900 via-slate-800 to-indigo-950',
+    icon: 'text-slate-200 drop-shadow-[0_0_8px_rgba(203,213,225,0.4)]',
+    text: 'text-white',
+    sub: 'text-slate-400',
+    pill: 'bg-white/10 border-white/15',
+    pillText: 'text-slate-300',
+    badge: 'bg-indigo-500/30 text-indigo-200 border-indigo-400/30',
+  },
+  sunset: {
+    bg: 'bg-gradient-to-r from-orange-500 via-rose-400 to-purple-500',
+    icon: 'text-yellow-200 drop-shadow-[0_0_8px_rgba(253,186,116,0.5)]',
+    text: 'text-white',
+    sub: 'text-white/70',
+    pill: 'bg-white/20 border-white/25',
+    pillText: 'text-white/90',
+    badge: 'bg-orange-400/30 text-orange-100 border-orange-300/30',
+  },
+  cloudy: {
+    bg: 'bg-gradient-to-r from-slate-400 via-slate-300 to-gray-400',
+    icon: 'text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.3)]',
+    text: 'text-slate-800',
+    sub: 'text-slate-500',
+    pill: 'bg-slate-700/15 border-slate-500/20',
+    pillText: 'text-slate-600',
+    badge: 'bg-slate-500/20 text-slate-700 border-slate-400/30',
+  },
+  'cloudy-day': {
+    bg: 'bg-gradient-to-r from-sky-300 via-slate-200 to-sky-300',
+    icon: 'text-slate-500 drop-shadow-[0_0_4px_rgba(148,163,184,0.3)]',
+    text: 'text-slate-800',
+    sub: 'text-slate-500',
+    pill: 'bg-slate-700/10 border-slate-400/20',
+    pillText: 'text-slate-600',
+    badge: 'bg-sky-500/15 text-sky-700 border-sky-400/25',
+  },
+  rain: {
+    bg: 'bg-gradient-to-r from-slate-600 via-blue-700 to-slate-700',
+    icon: 'text-blue-300 drop-shadow-[0_0_8px_rgba(147,197,253,0.4)]',
+    text: 'text-white',
+    sub: 'text-blue-200/70',
+    pill: 'bg-white/15 border-white/20',
+    pillText: 'text-blue-100',
+    badge: 'bg-blue-400/25 text-blue-200 border-blue-300/30',
+  },
+  storm: {
+    bg: 'bg-gradient-to-r from-slate-800 via-purple-900 to-slate-900',
+    icon: 'text-purple-300 drop-shadow-[0_0_10px_rgba(196,181,253,0.5)]',
+    text: 'text-white',
+    sub: 'text-purple-300/70',
+    pill: 'bg-white/10 border-white/15',
+    pillText: 'text-purple-200',
+    badge: 'bg-purple-500/25 text-purple-200 border-purple-400/30',
+  },
+};
+
+const getBeachCondition = (code: number, temp: number) => {
+  if (code >= 80) return null;
+  if (code >= 51) return null;
+  if (code <= 3 && temp >= 26 && temp <= 35) return 'Great for Beach';
+  if (code <= 3 && temp >= 22) return 'Good for Beach';
+  if (code <= 48) return 'Fair Weather';
+  return null;
 };
 
 export const WeatherWidget: React.FC = () => {
@@ -43,51 +123,42 @@ export const WeatherWidget: React.FC = () => {
       .finally(() => setLoaded(true));
   }, []);
 
-  const { icon: WeatherIcon, label, color } = weather
-    ? getWeatherIcon(weather.weatherCode)
-    : { icon: Sun, label: 'Loading...', color: 'text-slate-300' };
+  if (!loaded || !weather) {
+    if (loaded && !weather) return null;
+    return null;
+  }
+
+  const { icon: WeatherIcon, label, theme } = getWeatherInfo(weather.weatherCode, weather.isDay);
+  const style = themeStyles[theme];
+  const beach = getBeachCondition(weather.weatherCode, weather.temperature);
 
   return (
     <section className="px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-      <div
-        className={`bg-white/90 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-md border border-orange-100/80 w-full hover-lift transition-all duration-500 ${
-          loaded && weather ? 'opacity-100 translate-y-0' : loaded && !weather ? 'hidden' : 'opacity-0 translate-y-4'
-        }`}
-      >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3 sm:gap-4">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#FF7E5F]/20 to-[#FFB800]/20 flex items-center justify-center">
-              <WeatherIcon className={`w-7 h-7 sm:w-8 sm:h-8 ${color}`} />
-            </div>
-            <div>
+      <div className={`${style.bg} rounded-2xl px-3.5 sm:px-5 py-2.5 sm:py-3 shadow-md border border-white/10 w-full transition-all duration-500`}>
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <WeatherIcon className={`w-8 h-8 sm:w-9 sm:h-9 shrink-0 ${style.icon}`} />
+            <div className="min-w-0">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl sm:text-3xl font-extrabold text-[#1A2A2B]">{weather?.temperature ?? '--'}°C</span>
-                <span className="text-xs sm:text-sm font-semibold text-slate-500">{label}</span>
+                <span className={`text-xl sm:text-2xl font-extrabold ${style.text}`}>{weather.temperature}°</span>
+                <span className={`text-xs sm:text-sm font-semibold ${style.sub}`}>{label}</span>
               </div>
-              <p className="text-[11px] sm:text-xs text-slate-400 font-medium mt-0.5">Port Dickson, Negeri Sembilan &bull; Live</p>
+              <p className={`text-[10px] sm:text-[11px] font-medium ${style.sub} truncate`}>Port Dickson &bull; Live</p>
             </div>
           </div>
 
-          <div className="hidden sm:flex items-center gap-4 text-xs text-slate-500">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-100">
-              <Droplets className="w-3.5 h-3.5 text-blue-400" />
-              <span className="font-semibold">{weather?.humidity ?? '--'}%</span>
-              <span className="text-slate-400">Humidity</span>
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${style.pill} border text-[10px] sm:text-xs ${style.pillText} font-semibold`}>
+              <Droplets className="w-3 h-3" />{weather.humidity}%
             </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-100">
-              <Wind className="w-3.5 h-3.5 text-teal-400" />
-              <span className="font-semibold">{weather?.windSpeed ?? '--'} km/h</span>
-              <span className="text-slate-400">Wind</span>
+            <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${style.pill} border text-[10px] sm:text-xs ${style.pillText} font-semibold`}>
+              <Wind className="w-3 h-3" />{weather.windSpeed}<span className="hidden sm:inline"> km/h</span>
             </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-100">
-              <Sun className="w-3.5 h-3.5 text-amber-400" />
-              <span className="font-semibold text-emerald-700">Perfect for Beach</span>
-            </div>
-          </div>
-
-          <div className="sm:hidden flex items-center gap-2 text-[10px] text-slate-500">
-            <span className="flex items-center gap-1"><Droplets className="w-3 h-3 text-blue-400" />{weather?.humidity ?? '--'}%</span>
-            <span className="flex items-center gap-1"><Wind className="w-3 h-3 text-teal-400" />{weather?.windSpeed ?? '--'}km/h</span>
+            {beach && (
+              <div className={`hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-lg ${style.badge} border text-[11px] font-bold`}>
+                <Sun className="w-3 h-3" />{beach}
+              </div>
+            )}
           </div>
         </div>
       </div>
